@@ -1,12 +1,10 @@
-package com.javaacademy;
+package com.javaacademy.nuclearstation;
 
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 
 @SpringBootApplication
-@Slf4j
 public class Runner {
     public static void main(String[] args) {
         ConfigurableApplicationContext context = SpringApplication.run(Runner.class);
