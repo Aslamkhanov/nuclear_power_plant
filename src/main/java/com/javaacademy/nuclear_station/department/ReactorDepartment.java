@@ -1,8 +1,7 @@
-package com.javaacademy.nuclearstation.reactordepartment;
+package com.javaacademy.nuclear_station.department;
 
-import com.javaacademy.nuclearstation.exceptions.NuclearFuelIsEmptyException;
-import com.javaacademy.nuclearstation.exceptions.ReactorWorkException;
-import com.javaacademy.nuclearstation.securitydepartment.SecurityDepartment;
+import com.javaacademy.nuclear_station.exceptions.NuclearFuelIsEmptyException;
+import com.javaacademy.nuclear_station.exceptions.ReactorWorkException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

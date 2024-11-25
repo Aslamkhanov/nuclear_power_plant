@@ -1,14 +1,13 @@
-package com.javaacademy.nuclearstation;
+package com.javaacademy.nuclear_station;
 
-import com.javaacademy.nuclearstation.economicdepartment.EconomicDepartment;
-import com.javaacademy.nuclearstation.exceptions.NuclearFuelIsEmptyException;
-import com.javaacademy.nuclearstation.exceptions.ReactorWorkException;
-import com.javaacademy.nuclearstation.reactordepartment.ReactorDepartment;
-import com.javaacademy.nuclearstation.securitydepartment.SecurityDepartment;
+import com.javaacademy.nuclear_station.department.economic_department.EconomicDepartment;
+import com.javaacademy.nuclear_station.exceptions.NuclearFuelIsEmptyException;
+import com.javaacademy.nuclear_station.exceptions.ReactorWorkException;
+import com.javaacademy.nuclear_station.department.ReactorDepartment;
+import com.javaacademy.nuclear_station.department.SecurityDepartment;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -49,9 +48,9 @@ public class NuclearStation {
                 kilowattHoursOfYear = kilowattHoursOfYear.add(kilowattHoursOfDay);
                 reactorDepartment.stop();
             } catch (NuclearFuelIsEmptyException e) {
-                log.info("Происходят работы на атомной станции! Электричества нет!");
+                log.warn("Происходят работы на атомной станции! Электричества нет!");
             } catch (ReactorWorkException e) {
-                log.info(e.getMessage());
+                log.warn(e.getMessage());
             }
         }
         log.info("Атомная станция закончила работу.");

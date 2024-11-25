@@ -1,4 +1,4 @@
-package com.javaacademy.nuclearstation.economicdepartment;
+package com.javaacademy.nuclear_station.department.economic_department;
 
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Value;

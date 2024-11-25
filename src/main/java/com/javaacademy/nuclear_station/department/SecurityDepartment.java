@@ -1,24 +1,26 @@
-package com.javaacademy.nuclearstation.securitydepartment;
+package com.javaacademy.nuclear_station.department;
 
-import com.javaacademy.nuclearstation.NuclearStation;
+import com.javaacademy.nuclear_station.NuclearStation;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 @Component
 public class SecurityDepartment {
-    private int accidentCountPeriod;
     private final NuclearStation nuclearStation;
+    private int accidentCountPeriod;
 
     public SecurityDepartment(@Lazy NuclearStation nuclearStation) {
         this.nuclearStation = nuclearStation;
     }
 
     public void addAccident() {
-        accidentCountPeriod ++;
+        accidentCountPeriod++;
     }
+
     public int getCountAccidents() {
         return accidentCountPeriod;
     }
+
     public void reset() {
         nuclearStation.incrementAccident(accidentCountPeriod);
         accidentCountPeriod = 0;
