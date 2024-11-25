@@ -10,8 +10,9 @@ import java.math.BigDecimal;
 @RequiredArgsConstructor
 @Component
 public class ReactorDepartment {
-    private final static BigDecimal KILOWATT_HOURS = BigDecimal.valueOf(10_000_000);
+    private final BigDecimal kilowattHOURS = BigDecimal.valueOf(10_000_000);
     private final SecurityDepartment securityDepartment;
+    private final int hundred = 100;
     private int count = 0;
     private boolean isWorks;
 
@@ -21,12 +22,12 @@ public class ReactorDepartment {
             throw new ReactorWorkException("Реактор уже работает");
         }
         count++;
-        if (count % 100 == 0) {
+        if (count % hundred == 0) {
             securityDepartment.addAccident();
             throw new NuclearFuelIsEmptyException();
         }
         isWorks = true;
-        return KILOWATT_HOURS;
+        return kilowattHOURS;
     }
 
     public void stop() throws ReactorWorkException {

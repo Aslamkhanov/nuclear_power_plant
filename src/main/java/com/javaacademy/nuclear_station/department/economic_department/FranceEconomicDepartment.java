@@ -12,7 +12,7 @@ import java.math.RoundingMode;
 @Component
 @Profile(value = "france")
 public class FranceEconomicDepartment extends EconomicDepartment {
-    private final static long BILLION = 1_000_000_000L;
+    private final long billion = 1_000_000_000L;
     @Value("${price}")
     private BigDecimal price;
     @Value("${percentage}")
@@ -24,7 +24,7 @@ public class FranceEconomicDepartment extends EconomicDepartment {
         int indexNextBillionKilowatt = 0;
 
         while (countElectricity > 0) {
-            long currentBatch = Math.min(countElectricity, BILLION);
+            long currentBatch = Math.min(countElectricity, billion);
             totalRevenue = totalRevenue.add(computeIncomes(currentBatch, indexNextBillionKilowatt));
             countElectricity -= currentBatch;
             indexNextBillionKilowatt++;

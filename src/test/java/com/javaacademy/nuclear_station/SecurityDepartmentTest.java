@@ -2,10 +2,10 @@ package com.javaacademy.nuclear_station;
 
 import com.javaacademy.nuclear_station.department.SecurityDepartment;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
 
@@ -17,6 +17,7 @@ public class SecurityDepartmentTest {
     private SecurityDepartment securityDepartment;
 
     @Test
+    @DisplayName("Работа счетчика")
     public void addAccidentSuccess() {
         securityDepartment.addAccident();
         int result = securityDepartment.getCountAccidents();
@@ -25,6 +26,7 @@ public class SecurityDepartmentTest {
     }
 
     @Test
+    @DisplayName("Обнуление счетчика")
     public void resetSuccess() {
         securityDepartment.addAccident();
         securityDepartment.reset();

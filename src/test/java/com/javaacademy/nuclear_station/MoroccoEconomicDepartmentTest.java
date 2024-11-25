@@ -14,17 +14,17 @@ import java.math.RoundingMode;
 
 @SpringBootTest
 @ActiveProfiles("morocco")
-@TestPropertySource(properties = {"price=0.10", "newPrice=0.15"})
+@TestPropertySource(properties = {"price=5", "newPrice=6"})
 public class MoroccoEconomicDepartmentTest {
     @Autowired
     private MoroccoEconomicDepartment moroccoEconomicDepartment;
 
     @Test
     @DisplayName("Расчет при электроэнергии ниже 5 миллиардов киловатт-часов")
-    public void computeYearIncomes() {
+    public void computeYearIncomesSuccess() {
         long countElectricity = 4_000_000_000L;
         BigDecimal expected = BigDecimal.valueOf(countElectricity)
-                .multiply(BigDecimal.valueOf(0.10)).setScale(2, RoundingMode.HALF_EVEN);
+                .multiply(BigDecimal.valueOf(5)).setScale(2, RoundingMode.HALF_EVEN);
 
         BigDecimal result = moroccoEconomicDepartment.computeYearIncomes(countElectricity);
 
@@ -34,17 +34,16 @@ public class MoroccoEconomicDepartmentTest {
 
     @Test
     @DisplayName("Расчет при электроэнергии выше 5 миллиардов киловатт-часов")
-    public void computeYearIncomes_AboveThreshold() {
+    public void computeYearIncomesAboveThresholdSuccess() {
         long countElectricity = 6_000_000_000L;
         long increasedElectricity = countElectricity - 5_000_000_000L;
 
-        BigDecimal expected = BigDecimal.valueOf(5_000_000_000L).multiply(BigDecimal.valueOf(0.10))
-                .add(BigDecimal.valueOf(increasedElectricity).multiply(BigDecimal.valueOf(0.15)))
+        BigDecimal expected = BigDecimal.valueOf(5_000_000_000L).multiply(BigDecimal.valueOf(5))
+                .add(BigDecimal.valueOf(increasedElectricity).multiply(BigDecimal.valueOf(6)))
                 .setScale(2, RoundingMode.HALF_EVEN);
 
         BigDecimal result = moroccoEconomicDepartment.computeYearIncomes(countElectricity);
 
         Assertions.assertEquals(expected, result);
     }
-
 }

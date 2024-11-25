@@ -1,10 +1,10 @@
 package com.javaacademy.nuclear_station;
 
+import com.javaacademy.nuclear_station.department.ReactorDepartment;
+import com.javaacademy.nuclear_station.department.SecurityDepartment;
 import com.javaacademy.nuclear_station.department.economic_department.EconomicDepartment;
 import com.javaacademy.nuclear_station.exceptions.NuclearFuelIsEmptyException;
 import com.javaacademy.nuclear_station.exceptions.ReactorWorkException;
-import com.javaacademy.nuclear_station.department.ReactorDepartment;
-import com.javaacademy.nuclear_station.department.SecurityDepartment;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -25,6 +25,7 @@ public class NuclearStation {
     private BigDecimal totalAmountOfEnergyGenerated = BigDecimal.ZERO;
     @Getter
     private int accidentCountAllTime;
+    private final int yearDays = 365;
     @Value("${country}")
     private String country;
     @Value("${currency}")
@@ -42,7 +43,7 @@ public class NuclearStation {
     public void startYear() {
         BigDecimal kilowattHoursOfYear = BigDecimal.ZERO;
         log.info("Атомная станция начала работу");
-        for (int i = 0; i < 365; i++) {
+        for (int i = 0; i < yearDays; i++) {
             try {
                 BigDecimal kilowattHoursOfDay = reactorDepartment.run();
                 kilowattHoursOfYear = kilowattHoursOfYear.add(kilowattHoursOfDay);
@@ -56,6 +57,7 @@ public class NuclearStation {
         log.info("Атомная станция закончила работу.");
         log.info("За год Выработано: {} киловатт/часов", kilowattHoursOfYear);
         log.info("Количество инцидентов за год: {} ", securityDepartment.getCountAccidents());
+        totalAmountOfEnergyGenerated = totalAmountOfEnergyGenerated.add(kilowattHoursOfYear);
         log.info("Доход за год составил: {} {}", economicDepartment.
                 computeYearIncomes(kilowattHoursOfYear.longValue()).
                 setScale(2, RoundingMode.HALF_EVEN), currency);
